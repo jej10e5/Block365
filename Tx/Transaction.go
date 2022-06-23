@@ -1,4 +1,4 @@
-package main
+package Tx
 
 import (
 	"bytes"
@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"strconv"
 	"time"
+	w "wallet"
 )
 
 type Tx struct {
@@ -39,7 +40,7 @@ func (tx *Tx) setHash() {
 
 }
 
-func NewTx(fw *Wallet, tw *Wallet, item string, pri int, nonce int) *Tx {
+func NewTx(fw *w.Wallet, tw *w.Wallet, item string, pri int, nonce int) *Tx {
 
 	tx := &Tx{}
 	tx.Timestamp = time.Now().UTC().Unix() //utc기준 시간
@@ -80,7 +81,7 @@ func (t *Tx) EqualHash(e []byte) bool {
 	return bytes.Equal(t.Hash, e)
 }
 
-func (tx *Tx) Sign(w *Wallet) {
+func (tx *Tx) Sign(w *w.Wallet) {
 	privateKey := w.PrivateKey
 	sig, err := ecdsa.SignASN1(rand.Reader, &privateKey, tx.Hash[:])
 	if err != nil {
@@ -89,6 +90,6 @@ func (tx *Tx) Sign(w *Wallet) {
 	tx.Sig = sig[:]
 }
 
-func (tx *Tx) ValidateTx(w *Wallet) bool {
+func (tx *Tx) ValidateTx(w *w.Wallet) bool {
 	return ecdsa.VerifyASN1(&w.PrivateKey.PublicKey, tx.Hash[:], tx.Sig[:])
 }
