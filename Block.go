@@ -8,6 +8,8 @@ import (
 	"time"
 )
 
+//commit
+
 type Block struct {
 	Hash          []byte   `json:"Hash"`
 	PrevBlockHash []byte   `json:"PrevBlockHash"`
