@@ -1,4 +1,4 @@
-package Tx
+package main
 
 import (
 	"bytes"
@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"strconv"
 	"time"
-	w "wallet"
 )
 
 type Tx struct {

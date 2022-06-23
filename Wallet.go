@@ -1,4 +1,4 @@
-package wallet
+package main
 
 import (
 	"btcsuite/btcd/btcutil/base58"

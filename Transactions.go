@@ -1,4 +1,4 @@
-package Tx
+package main
 
 type TxsData struct {
 	Txs []*Tx
